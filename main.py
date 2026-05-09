@@ -5,7 +5,8 @@ import time
 import os
 import signal
 import json
-from pauser import check_and_pause_leigod
+from pauser import pause_leigod
+import checker
 
 CONFIG_FILE = "config.json"
 INTERVALS = {
@@ -72,7 +73,29 @@ def monitor_loop():
     """Background thread loop that checks Leigod."""
     while running:
         print(f"\nRunning scheduled check... (Current interval: {current_interval}s)")
-        check_and_pause_leigod()
+        
+        try:
+            if not checker.is_leigod_running():
+                print("Leigod is ALREADY PAUSED. Doing nothing.")
+            else:
+                print("Leigod is ON. Checking for active games...")
+                try:
+                    with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
+                        monitored_games = json.load(f).get("monitored_games", [])
+                except Exception:
+                    monitored_games = []
+                
+                game_running = False
+                for game in monitored_games:
+                    if checker.is_process_running(game):
+                        print(f"Game detected: {game}. Will NOT pause.")
+                        game_running = True
+                        break
+                        
+                if not game_running:
+                    pause_leigod()
+        except Exception as e:
+            print(f"[Error] Failed to check Leigod: {e}")
         
         # We loop in 1-second intervals so we can exit quickly if the app is quit,
         # or immediately trigger if the interval is reduced by the user.

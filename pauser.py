@@ -54,22 +54,9 @@ def get_leigod_hwnd():
     win32gui.EnumWindows(enum_cb, hwnds)
     return hwnds[0] if hwnds else None
 
-def check_and_pause_leigod():
-    config = load_config()
-    monitored_games = config.get("monitored_games", [])
-
-    print(f"Checking if Leigod tunnel is active...")
-    if not checker.is_leigod_running():
-        print("Leigod is ALREADY PAUSED. Skipping.")
-        return
-
-    print("Leigod is RUNNING. Checking for active games...")
-    for game in monitored_games:
-        if checker.is_process_running(game):
-            print(f"Game detected: {game}. Will NOT pause.")
-            return
-            
-    print("No active games detected! Proceeding to pause Leigod via background click...")
+def pause_leigod():
+    """Executes the sequence of background clicks to pause Leigod."""
+    print("Proceeding to pause Leigod via background click...")
     
     hwnd = get_leigod_hwnd()
     if not hwnd:
