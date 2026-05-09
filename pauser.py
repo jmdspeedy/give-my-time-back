@@ -1,6 +1,10 @@
 import time
 import json
-import psutil
+import win32gui
+import win32api
+import win32con
+import ctypes
+import checker
 import win32gui
 import win32api
 import win32con
@@ -31,17 +35,6 @@ def load_config():
         print(f"Error loading config in pauser: {e}")
         return {}
 
-def is_process_running(process_name):
-    if not process_name: return False
-    process_name = process_name.lower()
-    for proc in psutil.process_iter(['name']):
-        try:
-            if proc.info['name'] and proc.info['name'].lower() == process_name:
-                return True
-        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-            pass
-    return False
-
 def background_click(hwnd, x, y):
     """Sends a mouse click to a window in the background."""
     lparam = win32api.MAKELONG(int(x), int(y))
@@ -63,17 +56,16 @@ def get_leigod_hwnd():
 
 def check_and_pause_leigod():
     config = load_config()
-    boost_process = config.get("leigod_boost_process", "networktunnel_proxy.exe")
     monitored_games = config.get("monitored_games", [])
 
-    print(f"Checking if Leigod tunnel ({boost_process}) is active...")
-    if not is_process_running(boost_process):
-        print("Leigod is ALREADY PAUSED (Boost process not found). Skipping.")
+    print(f"Checking if Leigod tunnel is active...")
+    if not checker.is_leigod_running():
+        print("Leigod is ALREADY PAUSED. Skipping.")
         return
 
     print("Leigod is RUNNING. Checking for active games...")
     for game in monitored_games:
-        if is_process_running(game):
+        if checker.is_process_running(game):
             print(f"Game detected: {game}. Will NOT pause.")
             return
             
