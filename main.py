@@ -53,7 +53,13 @@ def is_interval_checked(item):
     return current_interval == INTERVALS[item.text]
 
 def create_image():
-    """Generate a simple icon for the system tray"""
+    """Load the custom icon or generate a simple fallback icon"""
+    if os.path.exists("icon.png"):
+        try:
+            return Image.open("icon.png")
+        except Exception as e:
+            print(f"Failed to load icon.png: {e}")
+            
     width = 64
     height = 64
     color1 = "black"
@@ -123,7 +129,7 @@ def setup_tray():
         pystray.MenuItem("Quit", on_quit)
     )
     icon.icon = create_image()
-    icon.title = "Leigod Auto Pause"
+    icon.title = "Give my time back"
     icon.run()
 
 def signal_handler(sig, frame):
