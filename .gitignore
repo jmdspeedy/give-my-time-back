@@ -18,3 +18,12 @@ leigod_ui_tree.txt
 # Editor/IDE files
 .vscode/
 .idea/
+
+# Build and distribution
+dist/
+build/
+*.spec
+
+# Runtime files
+*.log
+config.json

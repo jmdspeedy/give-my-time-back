@@ -148,11 +148,10 @@ def monitor_loop():
             time.sleep(1)
             elapsed += 1
 
+from log_viewer import show_log_window
+
 def open_log(icon, item):
-    log_file = resource_path("give_my_time_back.log")
-    if not os.path.exists(log_file):
-        open(log_file, 'a').close()
-    os.startfile(log_file)
+    show_log_window()
 
 def build_menu():
     interval_items = []

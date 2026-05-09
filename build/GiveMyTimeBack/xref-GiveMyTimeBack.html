@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>modulegraph cross reference for main.py, pyi_rth_inspect.py</title>
+    <title>modulegraph cross reference for main.py, pyi_rth__tkinter.py, pyi_rth_inspect.py</title>
     <style>
       .node { padding: 0.5em 0 0.5em; border-top: thin grey dotted; }
       .moduletype { font: smaller italic }
@@ -11,7 +11,7 @@
     </style>
   </head>
   <body>
-    <h1>modulegraph cross reference for main.py, pyi_rth_inspect.py</h1>
+    <h1>modulegraph cross reference for main.py, pyi_rth__tkinter.py, pyi_rth_inspect.py</h1>
 
 <div class="node">
   <a name="main.py"></a>
@@ -161,12 +161,14 @@ imports:
  &#8226;   <a href="#keyword">keyword</a>
  &#8226;   <a href="#linecache">linecache</a>
  &#8226;   <a href="#locale">locale</a>
+ &#8226;   <a href="#log_viewer">log_viewer</a>
  &#8226;   <a href="#logger">logger</a>
  &#8226;   <a href="#ntpath">ntpath</a>
  &#8226;   <a href="#operator">operator</a>
  &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#pauser">pauser</a>
  &#8226;   <a href="#posixpath">posixpath</a>
+ &#8226;   <a href="#pyi_rth__tkinter.py">pyi_rth__tkinter.py</a>
  &#8226;   <a href="#pyi_rth_inspect.py">pyi_rth_inspect.py</a>
  &#8226;   <a href="#pystray">pystray</a>
  &#8226;   <a href="#re">re</a>
@@ -187,6 +189,23 @@ imports:
  &#8226;   <a href="#types">types</a>
  &#8226;   <a href="#warnings">warnings</a>
  &#8226;   <a href="#weakref">weakref</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="pyi_rth__tkinter.py"></a>
+  <a target="code" href="///C:/Users/MITS/Documents/GitHub/give-my-time-back/venv/Lib/site-packages/PyInstaller/hooks/rthooks/pyi_rth__tkinter.py" type="text/plain"><tt>pyi_rth__tkinter.py</tt></a>
+<span class="moduletype">Script</span>  <div class="import">
+imports:
+    <a href="#os">os</a>
+ &#8226;   <a href="#sys">sys</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#main.py">main.py</a>
 
   </div>
 
@@ -3617,6 +3636,16 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="_tkinter"></a>
+  <tt>_tkinter</tt> <span class="moduletype"><tt>C:\Users\MITS\AppData\Local\Programs\Python\Python311\DLLs\_tkinter.pyd</tt></span>  <div class="import">
+imported by:
+    <a href="#tkinter">tkinter</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="_tokenize"></a>
   <tt>_tokenize</tt> <span class="moduletype"><i>(builtin module)</i></span>  <div class="import">
 imported by:
@@ -4173,6 +4202,7 @@ imported by:
  &#8226;   <a href="#statistics">statistics</a>
  &#8226;   <a href="#string">string</a>
  &#8226;   <a href="#threading">threading</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
  &#8226;   <a href="#tokenize">tokenize</a>
  &#8226;   <a href="#typing">typing</a>
  &#8226;   <a href="#urllib.parse">urllib.parse</a>
@@ -7528,6 +7558,7 @@ imported by:
  &#8226;   <a href="#signal">signal</a>
  &#8226;   <a href="#socket">socket</a>
  &#8226;   <a href="#ssl">ssl</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
 
   </div>
 
@@ -7981,7 +8012,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#main.py">main.py</a>
+    <a href="#log_viewer">log_viewer</a>
+ &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#pauser">pauser</a>
 
   </div>
@@ -8826,18 +8858,42 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="log_viewer"></a>
+  <a target="code" href="///C:/Users/MITS/Documents/GitHub/give-my-time-back/log_viewer.py" type="text/plain"><tt>log_viewer</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#i18n">i18n</a>
+ &#8226;   <a href="#logger">logger</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#queue">queue</a>
+ &#8226;   <a href="#threading">threading</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
+ &#8226;   <a href="#tkinter.scrolledtext">tkinter.scrolledtext</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#main.py">main.py</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="logger"></a>
   <a target="code" href="///C:/Users/MITS/Documents/GitHub/give-my-time-back/logger.py" type="text/plain"><tt>logger</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
     <a href="#logging">logging</a>
  &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#queue">queue</a>
  &#8226;   <a href="#sys">sys</a>
 
   </div>
   <div class="import">
 imported by:
-    <a href="#main.py">main.py</a>
+    <a href="#log_viewer">log_viewer</a>
+ &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#pauser">pauser</a>
 
   </div>
@@ -9244,6 +9300,7 @@ imported by:
  &#8226;   <a href="#inspect">inspect</a>
  &#8226;   <a href="#linecache">linecache</a>
  &#8226;   <a href="#locale">locale</a>
+ &#8226;   <a href="#log_viewer">log_viewer</a>
  &#8226;   <a href="#logger">logger</a>
  &#8226;   <a href="#logging">logging</a>
  &#8226;   <a href="#lzma">lzma</a>
@@ -9258,6 +9315,7 @@ imported by:
  &#8226;   <a href="#psutil._common">psutil._common</a>
  &#8226;   <a href="#psutil._pswindows">psutil._pswindows</a>
  &#8226;   <a href="#py_compile">py_compile</a>
+ &#8226;   <a href="#pyi_rth__tkinter.py">pyi_rth__tkinter.py</a>
  &#8226;   <a href="#pyi_rth_inspect.py">pyi_rth_inspect.py</a>
  &#8226;   <a href="#pystray">pystray</a>
  &#8226;   <a href="#pystray._util">pystray._util</a>
@@ -9272,6 +9330,7 @@ imported by:
  &#8226;   <a href="#tarfile">tarfile</a>
  &#8226;   <a href="#tempfile">tempfile</a>
  &#8226;   <a href="#threading">threading</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
  &#8226;   <a href="#xml.sax">xml.sax</a>
  &#8226;   <a href="#xml.sax.saxutils">xml.sax.saxutils</a>
@@ -9978,7 +10037,9 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#six.moves.queue">six.moves.queue</a>
+    <a href="#log_viewer">log_viewer</a>
+ &#8226;   <a href="#logger">logger</a>
+ &#8226;   <a href="#six.moves.queue">six.moves.queue</a>
 
   </div>
 
@@ -10115,6 +10176,7 @@ imported by:
  &#8226;   <a href="#string">string</a>
  &#8226;   <a href="#tarfile">tarfile</a>
  &#8226;   <a href="#textwrap">textwrap</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
  &#8226;   <a href="#tokenize">tokenize</a>
  &#8226;   <a href="#typing">typing</a>
  &#8226;   <a href="#urllib.parse">urllib.parse</a>
@@ -10775,6 +10837,7 @@ imported by:
  &#8226;   <a href="#psutil._common">psutil._common</a>
  &#8226;   <a href="#psutil._pswindows">psutil._pswindows</a>
  &#8226;   <a href="#py_compile">py_compile</a>
+ &#8226;   <a href="#pyi_rth__tkinter.py">pyi_rth__tkinter.py</a>
  &#8226;   <a href="#pyi_rth_inspect.py">pyi_rth_inspect.py</a>
  &#8226;   <a href="#pystray">pystray</a>
  &#8226;   <a href="#pystray._xorg">pystray._xorg</a>
@@ -10791,6 +10854,7 @@ imported by:
  &#8226;   <a href="#tarfile">tarfile</a>
  &#8226;   <a href="#tempfile">tempfile</a>
  &#8226;   <a href="#threading">threading</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
  &#8226;   <a href="#tokenize">tokenize</a>
  &#8226;   <a href="#traceback">traceback</a>
  &#8226;   <a href="#types">types</a>
@@ -10932,6 +10996,7 @@ imports:
 imported by:
     <a href="#_threading_local">_threading_local</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
+ &#8226;   <a href="#log_viewer">log_viewer</a>
  &#8226;   <a href="#logging">logging</a>
  &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#psutil">psutil</a>
@@ -10983,6 +11048,68 @@ imported by:
  &#8226;   <a href="#threading">threading</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
  &#8226;   <a href="#zipfile">zipfile</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="tkinter"></a>
+  <a target="code" href="///C:/Users/MITS/AppData/Local/Programs/Python/Python311/Lib/tkinter/__init__.py" type="text/plain"><tt>tkinter</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#_tkinter">_tkinter</a>
+ &#8226;   <a href="#collections">collections</a>
+ &#8226;   <a href="#enum">enum</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#re">re</a>
+ &#8226;   <a href="#sys">sys</a>
+ &#8226;   <a href="#tkinter.constants">tkinter.constants</a>
+ &#8226;   <a href="#tkinter.scrolledtext">tkinter.scrolledtext</a>
+ &#8226;   <a href="#traceback">traceback</a>
+ &#8226;   <a href="#types">types</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#log_viewer">log_viewer</a>
+ &#8226;   <a href="#tkinter.constants">tkinter.constants</a>
+ &#8226;   <a href="#tkinter.scrolledtext">tkinter.scrolledtext</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="tkinter.constants"></a>
+  <a target="code" href="///C:/Users/MITS/AppData/Local/Programs/Python/Python311/Lib/tkinter/constants.py" type="text/plain"><tt>tkinter.constants</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#tkinter">tkinter</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#tkinter">tkinter</a>
+ &#8226;   <a href="#tkinter.scrolledtext">tkinter.scrolledtext</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="tkinter.scrolledtext"></a>
+  <a target="code" href="///C:/Users/MITS/AppData/Local/Programs/Python/Python311/Lib/tkinter/scrolledtext.py" type="text/plain"><tt>tkinter.scrolledtext</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#tkinter">tkinter</a>
+ &#8226;   <a href="#tkinter.constants">tkinter.constants</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#log_viewer">log_viewer</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
 
   </div>
 
@@ -11050,6 +11177,7 @@ imported by:
  &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#py_compile">py_compile</a>
  &#8226;   <a href="#threading">threading</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
  &#8226;   <a href="#warnings">warnings</a>
 
   </div>
@@ -11119,6 +11247,7 @@ imported by:
  &#8226;   <a href="#six">six</a>
  &#8226;   <a href="#subprocess">subprocess</a>
  &#8226;   <a href="#tempfile">tempfile</a>
+ &#8226;   <a href="#tkinter">tkinter</a>
  &#8226;   <a href="#typing">typing</a>
  &#8226;   <a href="#urllib.parse">urllib.parse</a>
 
