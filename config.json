@@ -11,5 +11,6 @@
     ],
     "check_interval_seconds": 5,
     "leigod_boost_process": "networktunnel_proxy.exe",
-    "pause_hotkey": "ctrl+shift+p"
+    "pause_hotkey": "ctrl+shift+p",
+    "language": "\u4e2d\u6587"
 }
