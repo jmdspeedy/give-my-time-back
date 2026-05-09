@@ -9,7 +9,7 @@
         "VALORANT-Win64-Shipping.exe",
         "TslGame.exe"
     ],
-    "check_interval_seconds": 10,
+    "check_interval_seconds": 5,
     "leigod_boost_process": "networktunnel_proxy.exe",
     "pause_hotkey": "ctrl+shift+p"
 }

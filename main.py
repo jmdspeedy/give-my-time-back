@@ -78,7 +78,7 @@ def monitor_loop():
             if not checker.is_leigod_running():
                 print("Leigod is ALREADY PAUSED. Doing nothing.")
             else:
-                print("Leigod is ON. Checking for active games...")
+                print("Leigod is ON. Proceeding to pause...")
                 try:
                     with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
                         monitored_games = json.load(f).get("monitored_games", [])
