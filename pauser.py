@@ -5,6 +5,8 @@ import win32api
 import win32con
 import ctypes
 import checker
+from logger import log
+from i18n import t
 import win32gui
 import win32api
 import win32con
@@ -56,11 +58,11 @@ def get_leigod_hwnd():
 
 def pause_leigod():
     """Executes the sequence of background clicks to pause Leigod."""
-    print("Proceeding to pause Leigod via background click...")
+    log.info(t("log_pause_sequence"))
     
     hwnd = get_leigod_hwnd()
     if not hwnd:
-        print("Could not find the Leigod window!")
+        log.error(t("log_window_not_found"))
         return
         
     # Get the un-minimized (normal) dimensions of the window using GetWindowPlacement
@@ -70,23 +72,24 @@ def pause_leigod():
     width = normal_rect[2] - normal_rect[0]
     height = normal_rect[3] - normal_rect[1]
     
-    print(f"Window logic dimensions: {width}x{height} (Minimized: {win32gui.IsIconic(hwnd)})")
+    log.info(f"Window logic dimensions: {width}x{height} (Minimized: {win32gui.IsIconic(hwnd)})")
 
     # 1. Click the Pause button
     pause_x = width + PAUSE_BTN_OFFSET_X
     pause_y = PAUSE_BTN_OFFSET_Y
-    print(f"Sending background click to Pause button at ({pause_x}, {pause_y})...")
+    
+    log.info(f"Sending background click to Pause button at ({pause_x}, {pause_y})...")
     background_click(hwnd, pause_x, pause_y)
+    time.sleep(0.5)
 
-    time.sleep(2.5)
-
-    # 2. Click the Cancel button
+    # 2. Click the Cancel/Confirm button that pops up
     cancel_x = (width // 2) + CANCEL_BTN_OFFSET_X
     cancel_y = (height // 2) + CANCEL_BTN_OFFSET_Y
-    print(f"Sending background click to Cancel button at ({cancel_x}, {cancel_y})...")
+    
+    log.info(f"Sending background click to Cancel button at ({cancel_x}, {cancel_y})...")
     background_click(hwnd, cancel_x, cancel_y)
     
-    print("Pause sequence complete.")
+    log.info(t("log_pause_complete"))
 
 if __name__ == "__main__":
     check_and_pause_leigod()

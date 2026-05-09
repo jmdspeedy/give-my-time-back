@@ -7,6 +7,8 @@ import signal
 import json
 from pauser import pause_leigod
 import checker
+from logger import log
+from i18n import t, set_lang, get_lang
 
 CONFIG_FILE = "config.json"
 
@@ -18,46 +20,16 @@ INTERVAL_MAP = {
     1800: "30_min"
 }
 
-TRANSLATIONS = {
-    "English": {
-        "check_interval": "Check Interval",
-        "language": "Language",
-        "quit": "Quit",
-        "5_sec": "5 seconds (Debug)",
-        "1_min": "1 minute",
-        "5_min": "5 minutes",
-        "10_min": "10 minutes",
-        "30_min": "30 minutes",
-        "title": "Give my time back"
-    },
-    "中文": {
-        "check_interval": "检查间隔",
-        "language": "语言 / Language",
-        "quit": "退出",
-        "5_sec": "5 秒 (调试)",
-        "1_min": "1 分钟",
-        "5_min": "5 分钟",
-        "10_min": "10 分钟",
-        "30_min": "30 分钟",
-        "title": "还我时长"
-    }
-}
-
-def t(key):
-    return TRANSLATIONS.get(current_lang, TRANSLATIONS["English"]).get(key, key)
-
 # Global flag to control the background thread
 running = True
 current_interval = 300  # Default
-current_lang = "English"  # Default
 
 def load_config():
-    global current_interval, current_lang
+    global current_interval
     try:
         with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
             config = json.load(f)
             current_interval = config.get("check_interval_seconds", 300)
-            current_lang = config.get("language", "English")
     except Exception:
         pass
 
@@ -69,11 +41,11 @@ def save_config():
         else:
             config = {}
         config["check_interval_seconds"] = current_interval
-        config["language"] = current_lang
+        config["language"] = get_lang()
         with open(CONFIG_FILE, 'w', encoding='utf-8') as f:
             json.dump(config, f, indent=4)
     except Exception as e:
-        print(f"Error saving config: {e}")
+        log.error(f"Error saving config: {e}")
 
 
 
@@ -90,10 +62,9 @@ def set_interval_by_value(interval):
 
 def set_language(lang):
     def inner(icon, item):
-        global current_lang
-        current_lang = lang
+        set_lang(lang)
         save_config()
-        print(f"Language changed to {lang}")
+        log.info(f"Language changed to {lang}")
         # Need to rebuild menu for dynamic strings to update
         icon.title = t("title")
         icon.menu = build_menu()
@@ -101,7 +72,7 @@ def set_language(lang):
     return inner
 
 def is_lang_checked(lang):
-    return lambda item: current_lang == lang
+    return lambda item: get_lang() == lang
 
 def on_quit(icon, item):
     """Callback to handle quitting the app."""
@@ -109,13 +80,23 @@ def on_quit(icon, item):
     running = False
     icon.stop()
 
+import sys
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
 def create_image():
     """Load the custom icon or generate a simple fallback icon"""
-    if os.path.exists("icon.png"):
+    icon_path = resource_path("icon.png")
+    if os.path.exists(icon_path):
         try:
-            return Image.open("icon.png")
+            return Image.open(icon_path)
         except Exception as e:
-            print(f"Failed to load icon.png: {e}")
+            log.error(f"Failed to load icon.png: {e}")
             
     width = 64
     height = 64
@@ -135,13 +116,13 @@ def create_image():
 def monitor_loop():
     """Background thread loop that checks Leigod."""
     while running:
-        print(f"\nRunning scheduled check... (Current interval: {current_interval}s)")
+        log.info(t("log_checking", current_interval=current_interval))
         
         try:
             if not checker.is_leigod_running():
-                print("Leigod is ALREADY PAUSED. Doing nothing.")
+                log.info(t("log_already_paused"))
             else:
-                print("Leigod is ON. Checking for active games...")
+                log.info(t("log_leigod_on"))
                 try:
                     with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
                         monitored_games = json.load(f).get("monitored_games", [])
@@ -151,14 +132,14 @@ def monitor_loop():
                 game_running = False
                 for game in monitored_games:
                     if checker.is_process_running(game):
-                        print(f"Game detected: {game}. Will NOT pause.")
+                        log.info(t("log_game_detected", game=game))
                         game_running = True
                         break
                         
                 if not game_running:
                     pause_leigod()
         except Exception as e:
-            print(f"[Error] Failed to check Leigod: {e}")
+            log.error(f"[Error] Failed to check Leigod: {e}")
         
         # We loop in 1-second intervals so we can exit quickly if the app is quit,
         # or immediately trigger if the interval is reduced by the user.
@@ -167,10 +148,15 @@ def monitor_loop():
             time.sleep(1)
             elapsed += 1
 
+def open_log(icon, item):
+    log_file = resource_path("give_my_time_back.log")
+    if not os.path.exists(log_file):
+        open(log_file, 'a').close()
+    os.startfile(log_file)
+
 def build_menu():
     interval_items = []
     for interval, key in INTERVAL_MAP.items():
-        # Lambda for text to ensure dynamic translation, although here we rebuild menu anyway
         interval_items.append(pystray.MenuItem(lambda item, k=key: t(k), set_interval_by_value(interval), checked=is_interval_checked(interval), radio=True))
         
     lang_items = []
@@ -180,6 +166,7 @@ def build_menu():
     return pystray.Menu(
         pystray.MenuItem(lambda item: t("check_interval"), pystray.Menu(*interval_items)),
         pystray.MenuItem(lambda item: t("language"), pystray.Menu(*lang_items)),
+        pystray.MenuItem(lambda item: t("check_log"), open_log),
         pystray.MenuItem(lambda item: t("quit"), on_quit)
     )
 
