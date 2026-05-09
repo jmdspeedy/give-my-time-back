@@ -1,0 +1,20 @@
+# Virtual environments
+venv/
+env/
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary test/debug files
+debug_ui.py
+test_placement.py
+test_printwindow.py
+test_capture.png
+leigod_ui_tree.txt
+
+# Editor/IDE files
+.vscode/
+.idea/

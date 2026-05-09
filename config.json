@@ -1,0 +1,15 @@
+{
+    "leigod_process_name": "leigod.exe",
+    "pause_delay_seconds": 300,
+    "monitored_games": [
+        "cs2.exe",
+        "dota2.exe",
+        "vgc.exe",
+        "League of Legends.exe",
+        "VALORANT-Win64-Shipping.exe",
+        "TslGame.exe"
+    ],
+    "check_interval_seconds": 10,
+    "leigod_boost_process": "networktunnel_proxy.exe",
+    "pause_hotkey": "ctrl+shift+p"
+}
